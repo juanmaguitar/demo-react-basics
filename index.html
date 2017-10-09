@@ -23,18 +23,19 @@
       
       const beatles = ['John', 'Paul', 'George', 'Ringo']
       
-      const MyElement = () => {
-        console.log("myElement...")
-        return (
-          <div>
-            <h1 className="main-title">Beatles</h1>
-            <ul>{ beatles.map((beatle,i) => <li key={i}>{ beatle }</li>) }</ul>
-          </div>
-        )
-      }
+      const BeatleLink = (props) => <a href="#">{ props.title }</a>
+      
+      const BeatleItem = (props) => <li><BeatleLink title={ props.title } /></li>
+
+      const MyElement = (props) => (
+        <div>
+          <h1 className="main-title">{ props.title }</h1>
+          <ul>{ beatles.map((beatle,i) => <BeatleItem key={i} title={ beatle } />) }</ul>
+        </div>
+      )
 
       ReactDOM.render(
-        <MyElement />,
+        <MyElement title="Title Beatles" />,
         document.getElementById('root')
       );
 
