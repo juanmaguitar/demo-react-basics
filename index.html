@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ReactStrap</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+      .main-title {
+        color: red
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+      
+      const beatles = ['John', 'Paul', 'George', 'Ringo']
+      
+      const MyElement = () => {
+        console.log("myElement...")
+        return (
+          <div>
+            <h1 className="main-title">Beatles</h1>
+            <ul>{ beatles.map((beatle,i) => <li key={i}>{ beatle }</li>) }</ul>
+          </div>
+        )
+      }
+
+      ReactDOM.render(
+        <MyElement />,
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html>
