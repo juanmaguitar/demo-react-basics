@@ -20,24 +20,28 @@
 
     <script type="text/babel">
 
-      
-      const beatles = ['John', 'Paul', 'George', 'Ringo']
-      
-      const BeatleLink = (props) => <a href="#">{ props.title }</a>
-      
-      const BeatleItem = (props) => <li><BeatleLink title={ props.title } /></li>
+        const user = {
+          firstName: 'Harper',
+          lastName: 'Perez'
+        };
 
-      const MyElement = (props) => (
-        <div>
-          <h1 className="main-title">{ props.title }</h1>
-          <ul>{ beatles.map((beatle,i) => <BeatleItem key={i} title={ beatle } />) }</ul>
-        </div>
-      )
+        const myHeader = title => <h1>{ title }</h1>
+        const Header = props => <h1>{ props.title }</h1>
 
-      ReactDOM.render(
-        <MyElement title="Title Beatles" />,
-        document.getElementById('root')
-      );
+        const formatName = user => (
+          <div>
+            { myHeader("Hola!") }
+            <Header title="Adios" />
+            <h2><strong>{user.firstName}</strong> {user.lastName}</h2>
+          </div>
+        )
+
+        const Element = props => formatName(props.dataUser)
+        
+        ReactDOM.render(
+          <Element dataUser={ { firstName: 'JuanMa', lastName: 'Garrido' } } />,
+          document.getElementById('root')
+        );
 
     </script>
   </body>
