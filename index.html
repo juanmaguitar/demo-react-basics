@@ -20,35 +20,20 @@
 
     <script type="text/babel">
 
-        const user = {
-          firstName: 'Harper',
-          lastName: 'Perez'
-        };
-
-        const images = ['http://78.media.tumblr.com/f5cc1b61d79d75e7afe38a6dfe012cd6/tumblr_o8puh6OTYy1st5lhmo1_1280.jpg',
-'http://78.media.tumblr.com/0ecb5ad1d2293ebd6aa5ed0be71bf04c/tumblr_o8pugrx86y1st5lhmo1_1280.jpg',
-'http://78.media.tumblr.com/f67062575a7c43084e170a33c4e3c3e5/tumblr_o8pujuS5Ps1st5lhmo1_1280.jpg']
-        
-        const ImgItem = props => <img width="340" src={ props.url }></img>;
-
-        const myHeader = title => <h1>{ title }</h1>
-        const Header = props => <h1>{ props.title }</h1>
-
-        const formatName = user => (
+      function tick() {
+        const element = (
           <div>
-            { myHeader("Hola!") }
-            <Header title="Adios" />
-            <ImgItem url={ images[2]} />
-            <h2><strong>{user.firstName}</strong> {user.lastName}</h2>
+            <h1>Hello, world!</h1>
+            <h2>It is {new Date().toLocaleTimeString()}.</h2>
           </div>
-        )
-
-        const Element = props => formatName(props.dataUser)
-        
+        );
         ReactDOM.render(
-          <Element dataUser={ user } />,
+          element,
           document.getElementById('root')
         );
+      }
+
+      setInterval(tick, 1000);
 
     </script>
   </body>
