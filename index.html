@@ -20,59 +20,51 @@
 
     <script type="text/babel">
 
-      const Avatar = props => (
-        <img className="Avatar"
-          width="200"
-          src={props.user.avatarUrl}
-          alt={props.user.name}
-        />
-      )
+      class Clock extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = {
+            date: new Date()
+          }
+        }
 
-      const UserInfo = props => (
-        <div className="UserInfo">
-          <Avatar user={props.user} />
-          <div className="UserInfo-name">
-            {props.user.name}
-          </div>
-        </div>
-      )
+        tick() {
+          this.setState({
+            date: new Date()
+          });
+        }
 
-      const CommentText = props => (
-        <div className="Comment-text">
-          {props.text}
-        </div>
-      )
+        componentDidMount() {
+          console.log("just after rendering the component...")
+          this.timerID = setInterval(
+            () => this.tick(),
+            1000
+          )
+        }
 
-      const CommentDate = props => (
-        <div className="Comment-date">
-          { formatDate(props.date) }
-        </div>
-      )
+        // componentWillMount() {
+        
+        // }
 
-      const Comment = props => (
-        <div className="Comment">
-          <UserInfo user={props.author} />
-          <CommentText text={ props.text }/>
-          <CommentDate date={ props.date }/>
-        </div>
-      )
+        componentWillUnmount() {
+          clearInterval(this.timerID);
+        }
+
+        render() {
+            return (
+            <div>
+              <h1>{ this.props.text }</h1>
+              <h2>It is { this.state.date.toLocaleTimeString() }.</h2>
+            </div>
+          )
+        } 
+      }
       
-      const myText = "Hello everybody!"
-      const myDate = "09/10/2017"
-      const myUser = {
-        name: 'Juan Manuel',
-        avatarUrl: 'https://avatars2.githubusercontent.com/u/422576?v=4&s=460'
-      }
-
       ReactDOM.render(
-        <Comment author={ myUser } text={ myText } date={ myDate } />,
+        <Clock text="Hello Again World!" />,
         document.getElementById('root')
-      )
-
-      function formatDate(date) {
-        return date
-      }
-
+      );
+      
 
     </script>
   </body>
