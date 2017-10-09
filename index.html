@@ -20,20 +20,59 @@
 
     <script type="text/babel">
 
-      function tick() {
-        const element = (
-          <div>
-            <h1>Hello, world!</h1>
-            <h2>It is {new Date().toLocaleTimeString()}.</h2>
+      const Avatar = props => (
+        <img className="Avatar"
+          width="200"
+          src={props.user.avatarUrl}
+          alt={props.user.name}
+        />
+      )
+
+      const UserInfo = props => (
+        <div className="UserInfo">
+          <Avatar user={props.user} />
+          <div className="UserInfo-name">
+            {props.user.name}
           </div>
-        );
-        ReactDOM.render(
-          element,
-          document.getElementById('root')
-        );
+        </div>
+      )
+
+      const CommentText = props => (
+        <div className="Comment-text">
+          {props.text}
+        </div>
+      )
+
+      const CommentDate = props => (
+        <div className="Comment-date">
+          { formatDate(props.date) }
+        </div>
+      )
+
+      const Comment = props => (
+        <div className="Comment">
+          <UserInfo user={props.author} />
+          <CommentText text={ props.text }/>
+          <CommentDate date={ props.date }/>
+        </div>
+      )
+      
+      const myText = "Hello everybody!"
+      const myDate = "09/10/2017"
+      const myUser = {
+        name: 'Juan Manuel',
+        avatarUrl: 'https://avatars2.githubusercontent.com/u/422576?v=4&s=460'
       }
 
-      setInterval(tick, 1000);
+      ReactDOM.render(
+        <Comment author={ myUser } text={ myText } date={ myDate } />,
+        document.getElementById('root')
+      )
+
+      function formatDate(date) {
+        return date
+      }
+
 
     </script>
   </body>
