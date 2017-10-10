@@ -16,44 +16,28 @@
 
     <script type="text/babel">
 
-        const WarningBanner = props => {
-          if (!props.warn) return null;
-          return (
-            <div className="warning">
-              Warning!
-            </div>
-          );
-        }
+      const ListItem = props => <li>{props.value}</li>
 
-        class Page extends React.Component {
-          constructor(props) {
-            super(props);
-            this.state = { showWarning: true }
-            this.handleToggleClick = this.handleToggleClick.bind(this);
-          }
+      function NumberList(props) {
+        const numbers = props.numbers;
+        const listItems = numbers.map((number) =>
+          <ListItem key={number.toString()}
+                    value={number} />
 
-          handleToggleClick() {
-            this.setState(prevState => ({
-              showWarning: !prevState.showWarning
-            }));
-          }
-
-          render() {
-            return (
-              <div>
-                <WarningBanner warn={this.state.showWarning} />
-                <button onClick={this.handleToggleClick}>
-                  {this.state.showWarning ? 'Hide' : 'Show'}
-                </button>
-              </div>
-            );
-          }
-        }
-
-        ReactDOM.render(
-          <Page />,
-          document.getElementById('root')
         );
+        return (
+          <ul>
+            {listItems}
+          </ul>
+        );
+      }
+
+      const numbers = [1, 2, 3, 4, 5];
+      ReactDOM.render(
+        <NumberList numbers={numbers} />,
+        document.getElementById('root')
+      );
+
     </script>
   </body>
 </html>
