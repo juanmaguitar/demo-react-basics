@@ -8,11 +8,7 @@
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-      .main-title {
-        color: red
-      }
-    </style>
+    
   </head>
   <body>
 
@@ -20,51 +16,83 @@
 
     <script type="text/babel">
 
-      class Clock extends React.Component {
+      const text = 'fluctiferous woodlocked cyclopean gourdful indeprivable susurrate mythopoetize Gill shirr histamine forthgo apetalousness spleenful brachial precede clerkly nonnescience dollardom Alcaligenes outboard rubelet savagess responsively antagonism'
+
+      const Welcome = props => {
+        let loggedMsg
+        if (props.loggedUser) {
+          loggedMsg = <h3>Logged as {props.loggedUser}</h3>
+        } else {
+          loggedMsg = <h3>Not Logged!</h3>
+        }
+         
+        return (
+          <div>
+            <h1>{props.content}</h1>
+            { loggedMsg }
+          </div>
+        )
+      }
+      
+      class App extends React.Component {
         constructor(props) {
           super(props)
           this.state = {
-            date: new Date()
+            items: [],
+            loggedUser: ''
           }
         }
 
-        tick() {
+        setLoggedUser( username ) {
           this.setState({
-            date: new Date()
-          });
+            loggedUser: username
+          })
         }
 
-        componentDidMount() {
-          console.log("just after rendering the component...")
-          this.timerID = setInterval(
-            () => this.tick(),
-            1000
-          )
+        addItem( productName ) {
+          this.setState({
+            items: [ ...this.state.items, productName ]
+          })
         }
-
-        // componentWillMount() {
         
-        // }
+        removeItem( indexToRemove ) {
+          this.setState({
+            items: this.state.items.filter( (item,i) => i !== indexToRemove )
+          })
+        }
 
-        componentWillUnmount() {
-          clearInterval(this.timerID);
+        editItem( indexToEdit, newValue ) {
+          this.setState({
+            items: this.state.items.map( (originalValue,i) => {
+              if (i === indexToEdit) return newValue
+              else return originalValue
+            })
+          })
         }
 
         render() {
-            return (
-            <div>
-              <h1>{ this.props.text }</h1>
-              <h2>It is { this.state.date.toLocaleTimeString() }.</h2>
+          return (
+            <div className="container">
+              <Welcome loggedUser={ this.state.loggedUser } content="Hello World!"/>
+              <ul>
+                { 
+                  this.state.items.map( (item,i) => (
+                    <li key={i}>{item}</li>
+                  )) 
+                }
+              </ul>
+              <p>{ this.props.text }</p>
             </div>
           )
-        } 
+        }
       }
-      
+
       ReactDOM.render(
-        <Clock text="Hello Again World!" />,
+        <App text={ text } />,
         document.getElementById('root')
-      );
-      
+      )
+          
+    
 
     </script>
   </body>
