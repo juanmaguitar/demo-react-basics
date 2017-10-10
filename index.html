@@ -16,97 +16,14 @@
 
     <script type="text/babel">
 
-      const text = 'fluctiferous woodlocked cyclopean gourdful indeprivable susurrate mythopoetize Gill shirr histamine forthgo apetalousness spleenful brachial precede clerkly nonnescience dollardom Alcaligenes outboard rubelet savagess responsively antagonism'
-
-      class Welcome extends React.Component {
-        constructor(props) {
-          super(props)
-          this.state = {
-            numbers: Array(10).fill(0).map( number => Math.floor(Math.random()*1000))
-          }
-          this.handleClick = this.handleClick.bind(this)
-        }
-
-        handleClick(e) {
-          console.log(this)
-          console.log(e)
-          console.log(e.target)
-          console.log(this.state.numbers.join(' '))
-        }
-
-        render() {
-          return (
-            <div>
-              <h1>{this.props.content}</h1>
-              { 
-                this.props.loggedUser
-                ? <h3>Logged as {this.props.loggedUser}</h3>
-                : <h3>Not Logged!</h3>
-              }
-              <button onClick={ this.handleClick } className="btn btn-large btn-primary">Click Me!</button>
-            </div>
-          )
-        }
-      }
-      
-      class App extends React.Component {
-        constructor(props) {
-          super(props)
-          this.state = {
-            items: [],
-            loggedUser: ''
-          }
-        }
-
-        setLoggedUser( username ) {
-          this.setState({
-            loggedUser: username
-          })
-        }
-
-        addItem( productName ) {
-          this.setState({
-            items: [ ...this.state.items, productName ]
-          })
-        }
-        
-        removeItem( indexToRemove ) {
-          this.setState({
-            items: this.state.items.filter( (item,i) => i !== indexToRemove )
-          })
-        }
-
-        editItem( indexToEdit, newValue ) {
-          this.setState({
-            items: this.state.items.map( (originalValue,i) => {
-              if (i === indexToEdit) return newValue
-              else return originalValue
-            })
-          })
-        }
-
-        render() {
-          return (
-            <div className="container">
-              <Welcome loggedUser={ this.state.loggedUser } content="Hello World!"/>
-              <ul>
-                { 
-                  this.state.items.map( (item,i) => (
-                    <li key={i}>{item}</li>
-                  )) 
-                }
-              </ul>
-              <p>{ this.props.text }</p>
-            </div>
-          )
-        }
-      }
+      const UserGreeting = props => <h1>Welcome back!</h1>
+      const GuestGreeting = props => <h1>Please sign up.</h1>
+      const Greeting = ({ isLoggedIn }) => isLoggedIn ? <UserGreeting />: <GuestGreeting />
 
       ReactDOM.render(
-        <App text={ text } />,
+        <Greeting isLoggedIn={true} />,
         document.getElementById('root')
       )
-          
     
 
     </script>
